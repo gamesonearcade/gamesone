@@ -5467,7 +5467,7 @@ const dmNoSql=e=>/function|schema cache|404|not find/i.test(String(e&&e.message|
 function dmErrText(e){if(dmNoSql(e))return S.user.name===OWNER_NAME?"Texting isn't switched on yet. Run gamesone-update-6.sql in your Supabase SQL Editor.":"Texting isn't switched on yet. Ask the owner to switch it on.";return String(e&&e.message||e).replace(/^.*?:\s*/,"");}
 function dmChip(){const c=$("dmChip");if(!c)return;c.hidden=!online();c.textContent=DM.unread?`💬 Texts (${DM.unread})`:"💬 Texts";c.classList.toggle("hot",DM.unread>0);try{document.title=(DM.unread?`(${DM.unread}) `:"")+DM_TITLE}catch(e){}try{if(navigator.setAppBadge){DM.unread?navigator.setAppBadge(DM.unread):navigator.clearAppBadge()}}catch(e){}}
 function dmPoll(){if(!online()||!S.user.name)return dmChip();
- dmCall("unread").then(r=>{banScreen(false);DM.ok=true;if(!DMP.on)dmPushSetup();DM.err="";DM.unread=r.unread||0;DM.enabled=r.enabled!==false;dmChip();
+ dmCall("unread").then(r=>{banScreen(false);DM.ok=true;dmPushSetup();DM.err="";DM.unread=r.unread||0;DM.enabled=r.enabled!==false;dmChip();
   if(r.last&&r.last.id>(S.dmSeen||0)){S.dmSeen=r.last.id;save();if(!(DM.open&&DM.view==="thread"&&DM.with===r.last.from))dmNotify(r.last);}
   if(DM.open&&DM.view==="list")dmRender();}).catch(e=>{if(/banned players/.test(String(e&&e.message)))banScreen(true);DM.ok=false;DM.err=dmErrText(e);dmChip();});}
 // banned players can't play: a screen covers the whole arcade until the owner unbans them
@@ -5505,6 +5505,7 @@ const DMP={on:false,busy:false,tried:0};
 function dmB64u(s){s=String(s).replace(/-/g,"+").replace(/_/g,"/");const pad=s.length%4?4-s.length%4:0;const r=atob(s+"=".repeat(pad));const a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a;}
 function dmSameKey(sub,key){try{const k=sub&&sub.options&&sub.options.applicationServerKey;if(!k)return true;const a=new Uint8Array(k);if(a.length!==key.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==key[i])return false;return true}catch(e){return true}}
 async function dmPushSetup(){
+ if(DMP.pid!==S.user.id){DMP.on=false;DMP.tried=0}
  if(DMP.on||DMP.busy||DMP.tried>3)return;
  if(!online()||!S.user.name||!S.user.key||!dmNotifyOk())return;
  if(!("serviceWorker" in navigator)||!("PushManager" in window))return;
@@ -5518,7 +5519,7 @@ async function dmPushSetup(){
   if(sub&&!dmSameKey(sub,key)){try{await sub.unsubscribe()}catch(e){}sub=null;}
   if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key});
   await rpc("arcade_push_save",{p_player:S.user.id,p_key:S.user.key,p_sub:sub.toJSON(),p_ua:String(navigator.userAgent||"").slice(0,120)});
-  DMP.on=true;
+  DMP.on=true;DMP.pid=S.user.id;
  }catch(e){try{console.warn("push setup:",e&&e.message)}catch(_){}}
  DMP.busy=false;
 }
