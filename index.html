@@ -5552,7 +5552,9 @@ function dmRender(){const body=$("dmBody");if(!body)return;dmHead();body.textCon
  if(DM.view==="list"){
   try{if("Notification" in window){const np=Notification.permission;
    if(np==="default")body.appendChild(uBtn("🔔 Get a pop-up when someone texts you","",()=>dmAskNotify()));
-   else if(np==="denied")body.appendChild(el("p","k-note","🔕 Notifications are blocked for this site. Allow them in your browser's site settings to get a pop-up for new texts."));}}catch(e){}
+   else if(np==="denied")body.appendChild(el("p","k-note","🔕 Notifications are blocked for this site. Allow them in your browser's site settings to get a pop-up for new texts."));
+   else if(np==="granted")body.appendChild(el("p","k-note",DMP.on?"🔔 Pop-ups are ON. You'll get one when someone texts you, even with GamesOne closed.":"🔔 Pop-ups are allowed. Setting up…"));}
+  else if(/iPhone|iPad|iPod/.test(navigator.userAgent))body.appendChild(el("p","k-note","📱 To get pop-ups on iPhone: tap Share → Add to Home Screen, then open GamesOne from that icon."));}catch(e){}
   body.appendChild(uBtn("✏️ New text","",()=>{DM.view="people";DM.q="";DM.people=null;dmRender();dmLoadPeople();setTimeout(()=>{const s=$("dmSearch");s&&s.focus();},50);}));
   if(DM.list==null&&DM.err){body.appendChild(el("p","k-note",DM.err));return;}
   if(DM.list==null){body.appendChild(el("p","k-note","Loading..."));return;}
