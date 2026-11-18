@@ -10635,7 +10635,10 @@ function getawayTick(dt){const c=GTC.ctx,W=GTC.W,H=GTC.H;if(!W)return;c.setTrans
    if(GT.crashCd>0)GT.crashCd-=dt;
    if(wall(gtTile(nx,car.y))){airCrash();car.vx*=-.35;nx=car.x;car.v*=-.3}if(wall(gtTile(car.x,ny))){airCrash();car.vy*=-.35;ny=car.y;car.v*=-.3}
    // skimming past buildings at speed pays out and refills hover power
-   if(hs>330){const T=GT.T;let near=0;for(const[ox,oy]of[[1,0],[-1,0],[0,1],[0,-1]])if(wall(gtTile(nx+ox*T*.9,ny+oy*T*.9)))near=1;if(near){GT.skimT=(GT.skimT||0)+dt;GT.fuel=Math.min(1,GT.fuel+dt*.12);if(GT.skimT>.45){GT.skimT=0;S.gt.cash+=10;GT.pop={t:"🏙️ BUILDING SKIM +$10",s:.8}}}}
+   {const T=GT.T;let near=0;if(hs>260)for(const[ox,oy]of[[1,0],[-1,0],[0,1],[0,-1],[.7,.7],[-.7,.7],[.7,-.7],[-.7,-.7]])if(wall(gtTile(nx+ox*T*1.7,ny+oy*T*1.7))){near=1;break}
+    if(near){GT.skimT=(GT.skimT||0)+dt;GT.skimOff=0;GT.fuel=Math.min(1,GT.fuel+dt*.2);GT.nitro=Math.min(1,GT.nitro+dt*.25);
+     if(GT.skimT>.35){GT.skimT=0;GT.skimN=Math.min(10,(GT.skimN||0)+1);const pay=25*GT.skimN;S.gt.cash+=pay;GT.pop={t:`🏙️ SKIM x${GT.skimN}  +$${pay}`,s:1};car.v=Math.min(car.v+40,D.sp*1.6);try{beep(600+GT.skimN*80,900+GT.skimN*80,.12,"triangle",.05)}catch(e){}}}
+    else{GT.skimOff=(GT.skimOff||0)+dt;if(GT.skimOff>1.2&&GT.skimN){if(GT.skimN>=3)gtMsg(`🔥 SKIM COMBO x${GT.skimN}!`,1.4);GT.skimN=0}}}
   }else{const hs=Math.hypot(car.vx,car.vy);if(gtSolid(gtTile(nx,car.y))){gtHurt(hs/40);car.vx*=-.3;nx=car.x;car.v*=.4;GT.shake=.15}if(gtSolid(gtTile(car.x,ny))){gtHurt(hs/40);car.vy*=-.3;ny=car.y;car.v*=.4;GT.shake=.15}}car.x=nx;car.y=ny;
   {const sl=Math.abs(-Math.sin(car.a)*car.vx+Math.cos(car.a)*car.vy);GT.slip=sl;if(sl>90&&Math.hypot(car.vx,car.vy)>150&&!GT.air){GT.nitro=Math.min(1,GT.nitro+dt*.18);GT.driftT=(GT.driftT||0)+dt;if(GT.driftT>1.2&&Math.floor(GT.driftT*2)!==Math.floor((GT.driftT-dt)*2)){S.gt.cash+=5;GT.pop={t:"🔥 DRIFT +$5",s:.8}}GT.skids.push({x:car.x,y:car.y,a:car.a,t:6});if(GT.skids.length>220)GT.skids.shift()}else GT.driftT=0}
   }const spd=GT.onFoot?0:Math.hypot(car.vx,car.vy);
