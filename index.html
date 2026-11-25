@@ -5194,7 +5194,7 @@ function askOwnerPass(n,first,msg){
 function askNameErr(n,pr,first){askName(first);$("nameIn").value=n;$("kmBody").querySelector(".k-note").textContent=pr;}
 function updateUserChip(){$("userChip").textContent=(S.supporter?"★ ":"")+(S.user.name||"Pick a name");}
 // --- scores ---
-const LB=[["flap","Flap Packs","Best score"],["hoop","Hoop Shot","1v1 wins"],["hoopshoot","Hoop Shot Shootout","Best score"],["flaprace","Flap Packs Race","Race wins"],["skid","Bash Karts","Race wins"],["justup","Tower Climb","Highest climb (m)"],["hop","Jump Up","Best height"],["dash","Cross the Road","Best score"],["snow","Sled Ride","Longest ride (m)"],["soccer","Soccer","Matches won"],["wobble","Jelly Party","Shows won"],["cookie","Cookie Clicker","Cookies baked"],["tycoon","Cookie Tycoon","Cash earned"],["thief","Among Them","Games won"],["koth","Swapshot","Wins"],["gtime","Getaway Town","Longest chase (sec)"],["stormdrop","Battle Island","Wins"],["crown","Crown Wars","Takedowns"],["crownwins","Crown Wars","Realms conquered"],["hatventure","Hatventure","Star Shards"],["nightfall","Zombie Nights","Nights survived"],["hollowmere","Bellbreaker","Quests done"],["skate","Trick Skate","Best score"],["cube","Cube Dash","Levels beaten"],["rivals","Arena Rivals","Duels won"],["cannon","Crowd Cannon","Best level beaten"]];
+const LB=[["flap","Flap Packs","Best score"],["hoop","Hoop Shot","1v1 wins"],["hoopshoot","Hoop Shot Shootout","Best score"],["flaprace","Flap Packs Race","Race wins"],["skid","Bash Karts","Race wins"],["hop","Jump Up","Best height"],["dash","Cross the Road","Best score"],["snow","Sled Ride","Longest ride (m)"],["soccer","Soccer","Matches won"],["wobble","Jelly Party","Shows won"],["cookie","Cookie Clicker","Cookies baked"],["gtime","Getaway Town","Longest chase (sec)"],["stormdrop","Battle Island","Wins"],["crown","Crown Wars","Takedowns"],["crownwins","Crown Wars","Realms conquered"],["hatventure","Hatventure","Star Shards"],["nightfall","Zombie Nights","Nights survived"],["hollowmere","Bellbreaker","Quests done"],["cube","Cube Dash","Levels beaten"],["rivals","Arena Rivals","Duels won"]];
 if(!S.lb)S.lb={};if(!S.lbSent)S.lbSent={};
 let sending={};
 function KA_score(game,score){
@@ -7188,7 +7188,7 @@ function w3Render(){const V=W3;if(!V.ok)return false;const T3=V.T3,W=WR,Wd=W.W,H
  V.fxp.forEach((m,k)=>{const f=fx[k];m.visible=!!f;if(f){m.position.set(f.x*WU,f.z*WU,-f.y*WU);m.material=V.M(f.c||"#fff");}});
  return V.draw();}
 // ===== END JELLY PARTY 3D =====
-const TABS=[["turbo","⚽ Turbo League"],["hook","🪝 Hook Rush"],["fp","🐦 Flap Packs"],["cookie","🍪 Cookie Clicker"],["tycoon","🏙️ Cookie Tycoon"],["thief","👻 Among Them"],["koth","👑 Swapshot"],["getaway","🚓 Getaway Town"],["hollow","⚔️ Bellbreaker"],["storm","🌀 Battle Island"],["crown","👑 Crown Wars"],["night","🧟 Zombie Nights"],["sk","🏎️ Bash Karts"],["soccer","⚽ Soccer"],["hoop","🏀 Hoop Shot"],["skate","🛹 Trick Skate"],["cube","🟨 Cube Dash"],["cannon","💥 Crowd Cannon"],["wobble","🟪 Jelly Party"],["justup","🌙 Tower Climb"],["hop","✏️ Jump Up"],["dash","🐔 Cross the Road"],["snow","🛷 Sled Ride"],["rivals","🎯 Arena Rivals"]];
+const TABS=[["turbo","⚽ Turbo League"],["hook","🪝 Hook Rush"],["fp","🐦 Flap Packs"],["cookie","🍪 Cookie Clicker"],["getaway","🚓 Getaway Town"],["hollow","⚔️ Bellbreaker"],["storm","🌀 Battle Island"],["crown","👑 Crown Wars"],["night","🧟 Zombie Nights"],["sk","🏎️ Bash Karts"],["soccer","⚽ Soccer"],["hoop","🏀 Hoop Shot"],["cube","🟨 Cube Dash"],["wobble","🟪 Jelly Party"],["hop","✏️ Jump Up"],["dash","🐔 Cross the Road"],["snow","🛷 Sled Ride"],["rivals","🎯 Arena Rivals"]];
 if(window.KA_SOLO)document.body.classList.add("k-solo");
 let isTouch=matchMedia("(pointer: coarse)").matches;
 addEventListener("touchstart",()=>{if(!isTouch){isTouch=true;}},{passive:true});
@@ -7299,19 +7299,33 @@ function hubQuestUI(){const q=hubQuests(),box=document.createElement("div");box.
  modal("📋 Daily quests",box,[{label:"Close"},{label:"🎡 Daily spin",cls:"k-ghost",fn:()=>hubSpin()}])}
 // ---- daily spin: one free spin a day. Prizes are XP, level points and boosts (nothing to buy) ----
 const SPIN=[["50 XP","#ff7ab8",()=>addXP(50)],["1 ⭐ point","#ffd23f",()=>{S.lvl.bonusPts=(S.lvl.bonusPts||0)+1}],["120 XP","#5ec8ff",()=>addXP(120)],["⚡ 2× XP 15m","#a77bff",()=>{S.lvl.xpBoost=Math.max(Date.now(),S.lvl.xpBoost||0)+9e5}],
- ["80 XP","#7ee08a",()=>addXP(80)],["🪙 Coins 15m","#ff9a3a",()=>{S.lvl.coinBoost=Math.max(Date.now(),S.lvl.coinBoost||0)+9e5}],["200 XP","#3a9dff",()=>addXP(200)],["2 ⭐ points","#ff4f6a",()=>{S.lvl.bonusPts=(S.lvl.bonusPts||0)+2}]];
-const SPIN_W=[20,10,16,10,18,10,10,6];
+ ["80 XP","#7ee08a",()=>addXP(80)],["🪙 Coins 15m","#ff9a3a",()=>{S.lvl.coinBoost=Math.max(Date.now(),S.lvl.coinBoost||0)+9e5}],["200 XP","#3a9dff",()=>addXP(200)],["2 ⭐ points","#ff4f6a",()=>{S.lvl.bonusPts=(S.lvl.bonusPts||0)+2}],["💎 JACKPOT 5 ⭐","#1a1530",()=>{S.lvl.bonusPts=(S.lvl.bonusPts||0)+5}]];
+// chance of each prize in %. The slice on the wheel is exactly that big.
+const SPIN_W=[24,9,14,10,18,10,8,5,2];
 function hubCanSpin(){S.spin=S.spin||{};return S.spin.day!==hubDay()||(S.spin.extra||0)>0}
-function hubSpin(){S.spin=S.spin||{};const box=document.createElement("div");box.style.cssText="display:grid;place-items:center;gap:10px";const cv=document.createElement("canvas");cv.width=cv.height=280;cv.style.cssText="width:260px;height:260px";const res=document.createElement("b");res.style.minHeight="22px";
- const n=SPIN.length;let ang=0;const draw=()=>{const c=cv.getContext("2d");c.clearRect(0,0,280,280);for(let i=0;i<n;i++){c.beginPath();c.moveTo(140,140);c.arc(140,140,130,ang+i*2*Math.PI/n,ang+(i+1)*2*Math.PI/n);c.fillStyle=SPIN[i][1];c.fill();c.save();c.translate(140,140);c.rotate(ang+(i+.5)*2*Math.PI/n);c.fillStyle="#fff";c.font="900 14px Nunito, sans-serif";c.textAlign="right";c.lineWidth=3;c.strokeStyle="rgba(0,0,0,.35)";c.strokeText(SPIN[i][0],120,5);c.fillText(SPIN[i][0],120,5);c.restore()}
-  c.beginPath();c.arc(140,140,18,0,7);c.fillStyle="#fff";c.fill();c.fillStyle="#1a1530";c.beginPath();c.moveTo(128,2);c.lineTo(152,2);c.lineTo(140,24);c.closePath();c.fill()};draw();
+function hubSpin(){S.spin=S.spin||{};const box=document.createElement("div");box.style.cssText="display:grid;place-items:center;gap:10px";const cv=document.createElement("canvas");cv.width=cv.height=300;cv.style.cssText="width:280px;height:280px;max-width:80vw;max-height:80vw";const res=document.createElement("b");res.style.minHeight="22px";
+ const n=SPIN.length,TOT=SPIN_W.reduce((a,b)=>a+b,0),TAU=2*Math.PI,st=[];{let acc=0;for(let i=0;i<n;i++){st.push(acc/TOT*TAU);acc+=SPIN_W[i]}st.push(TAU)}
+ const segAt=a=>{let p=((-Math.PI/2-a)%TAU+TAU)%TAU;for(let i=0;i<n;i++)if(p<st[i+1])return i;return n-1};
+ let ang=0,hi=-1;const draw=()=>{const c=cv.getContext("2d"),C=150,R=140;c.clearRect(0,0,300,300);
+  c.beginPath();c.arc(C,C,R+6,0,TAU);c.fillStyle="#1a1530";c.fill();
+  for(let i=0;i<n;i++){const a0=ang+st[i],a1=ang+st[i+1];c.beginPath();c.moveTo(C,C);c.arc(C,C,R,a0,a1);c.closePath();c.fillStyle=SPIN[i][1];c.fill();c.lineWidth=2;c.strokeStyle="rgba(255,255,255,.85)";c.stroke();
+   if(i===hi){c.fillStyle="rgba(255,255,255,.28)";c.fill()}
+   const deg=(a1-a0)*180/Math.PI,fs=Math.max(9,Math.min(15,deg*.55));c.save();c.translate(C,C);c.rotate((a0+a1)/2);c.textAlign="right";c.lineWidth=3;c.strokeStyle="rgba(0,0,0,.4)";
+   c.font=`900 ${fs}px Nunito, sans-serif`;c.fillStyle=i===n-1?"#ffd23f":"#fff";c.strokeText(SPIN[i][0],R-12,fs*.35);c.fillText(SPIN[i][0],R-12,fs*.35);
+   c.restore()}
+  for(let k=0;k<24;k++){const a=k/24*TAU+ang*.0;c.beginPath();c.arc(C+Math.cos(a)*(R+3),C+Math.sin(a)*(R+3),2,0,TAU);c.fillStyle=k%2?"#ffd23f":"#fff";c.fill()}
+  c.beginPath();c.arc(C,C,22,0,TAU);c.fillStyle="#fff";c.fill();c.beginPath();c.arc(C,C,14,0,TAU);c.fillStyle="#1a1530";c.fill();
+  c.fillStyle="#fff";c.strokeStyle="#1a1530";c.lineWidth=3;c.beginPath();c.moveTo(C-14,2);c.lineTo(C+14,2);c.lineTo(C,30);c.closePath();c.fill();c.stroke()};draw();
+ const note=document.createElement("div");note.style.cssText="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-size:12.5px;width:min(320px,78vw)";
+ note.innerHTML=SPIN.map((p,i)=>`<span style="display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden"><i style="width:10px;height:10px;border-radius:3px;flex:none;background:${p[1]};border:1px solid rgba(0,0,0,.25)"></i>${p[0]} <b style="margin-left:auto">${Math.round(SPIN_W[i]/TOT*100)}%</b></span>`).join("")+`<small class="k-note" style="grid-column:1/-1;text-align:center">Bigger slice = bigger chance</small>`;
  const go=document.createElement("button");go.className="k-btn";const can=hubCanSpin();go.textContent=can?"🎡 SPIN!":"Come back tomorrow for your next spin";go.disabled=!can;
- go.onclick=()=>{if(!hubCanSpin())return;go.disabled=true;if(S.spin.day===hubDay())S.spin.extra--;else S.spin.day=hubDay();saveSoon();
-  let r=Math.random()*SPIN_W.reduce((a,b)=>a+b,0),pick=0;for(let i=0;i<n;i++){r-=SPIN_W[i];if(r<0){pick=i;break}}
-  const w=2*Math.PI/n,target=-Math.PI/2-(pick+.5)*w;let end=target;while(end>ang-8*Math.PI)end-=2*Math.PI;const start=ang,total=end-start,t0=performance.now(),dur=3600;let last=null;
-  const step=now=>{const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,4);ang=start+total*e;draw();const seg=Math.floor(ang/w);if(seg!==last){last=seg;try{beep(900,1000,.02,"square",.03)}catch(_){}}
-   if(k<1)requestAnimationFrame(step);else{SPIN[pick][2]();saveSoon();lvChip();hubDots();res.textContent="🎉 You won "+SPIN[pick][0]+"!";try{chime();setTimeout(chime,150)}catch(_){}go.textContent=hubCanSpin()?"🎡 Spin again (extra spin)":"Come back tomorrow!";go.disabled=!hubCanSpin()}};requestAnimationFrame(step)};
- box.append(cv,res,go);modal("🎡 Daily spin",box,[{label:"Close"}])}
+ go.onclick=()=>{if(!hubCanSpin())return;go.disabled=true;hi=-1;if(S.spin.day===hubDay())S.spin.extra--;else S.spin.day=hubDay();saveSoon();
+  let r=Math.random()*TOT,pick=0;for(let i=0;i<n;i++){r-=SPIN_W[i];if(r<0){pick=i;break}}
+  const land=st[pick]+(st[pick+1]-st[pick])*(.15+.7*Math.random());let end=-Math.PI/2-land;while(end>ang-8*Math.PI)end-=TAU;
+  const start=ang,total=end-start,t0=performance.now(),dur=4200;let last=null;
+  const step=now=>{const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,4);ang=start+total*e;draw();const seg=segAt(ang);if(seg!==last){last=seg;try{beep(900,1000,.02,"square",.03)}catch(_){}}
+   if(k<1)requestAnimationFrame(step);else{hi=pick;draw();SPIN[pick][2]();saveSoon();lvChip();hubDots();res.textContent=(pick===n-1?"💎💎 JACKPOT! You won 5 ⭐ points!":"🎉 You won "+SPIN[pick][0]+"!");try{chime();setTimeout(chime,150);if(pick===n-1)setTimeout(chime,320)}catch(_){}go.textContent=hubCanSpin()?"🎡 Spin again (extra spin)":"Come back tomorrow!";go.disabled=!hubCanSpin()}};requestAnimationFrame(step)};
+ box.append(cv,res,go,note);modal("🎡 Daily spin",box,[{label:"Close"}])}
 // ---- show everyone your colour and title: saved to the server, shown on leaderboards ----
 function hubColHex(){const all=[["Supporter Gold","#d4a000"],...LV_REW.filter(r=>r[1]==="c").map(r=>[r[2],r[3]]),...SHOP.filter(s=>s.col).map(s=>s.col)];const c=all.find(x=>x[0]===S.lvl.col);return c?c[1]:null}
 function hubProfile(){if(typeof online!=="function"||!online()||!S.user||!S.user.id)return;rpc("arcade_set_profile",{p_player:S.user.id,p_color:hubColHex(),p_title:lvTitle()||"",p_level:S.lvl.lv}).catch(()=>{})}
@@ -7322,8 +7336,8 @@ const HUB_SWAP={fp:"a Flappy-style race with power-ups and friends",cookie:"Cook
 function hubRecs(){const box=document.createElement("div");box.className="k-rew";const p=document.createElement("p");p.textContent=HUB_GLOBAL?"The 3 games everyone plays the least. Give them a go, or vote to swap them for something new!":"The 3 games you've played the least (connect to the arcade to see everyone's).";box.appendChild(p);
  const low=TABS.map(t=>t[0]).sort((a,b)=>hubPlayed(a)-hubPlayed(b)).slice(0,3);
  low.forEach((id,i)=>{const e=document.createElement("div");e.className="k-rew-it got";e.style.display="grid";e.style.gap="4px";const secs=hubPlayed(id);e.innerHTML=`<b>${i+1}. ${gameName(id)}</b><span>Played: ${secs?fmtHrs(secs):"barely at all"}</span><span>💡 Could be replaced with: <i>${HUB_SWAP[id]||"a brand new game"}</i></span>`;
-  const r=document.createElement("div");r.className="k-row";r.append(uBtn("▶ Play it","k-sm",()=>{closeModal();showTab(id)}),uBtn("✉ Suggest a replacement","k-sm k-ghost",()=>{closeModal();hubIdeas()}));e.appendChild(r);box.appendChild(e)});
- modal("💡 Recommendation center",box,[{label:"Close"},{label:"💡 Idea Contest",cls:"k-ghost",fn:()=>hubIdeas()}])}
+  const r=document.createElement("div");r.className="k-row";r.append(uBtn("▶ Play it","k-sm",()=>{closeModal();showTab(id)}));e.appendChild(r);box.appendChild(e)});
+ modal("💡 Recommendation center",box,[{label:"Close"}])}
 // ---- Idea Contest: buy an admission ticket, post your game idea, everyone votes during admin abuse ----
 // Put your Stripe Payment Link (or any payment page) here, e.g. "https://buy.stripe.com/xxxx". Empty = "coming soon".
 const TICKET_LINK="";const TICKET_PRICE="5 AED";
@@ -7346,7 +7360,7 @@ function hubGameBoost(){const n=HUB_NOTES[window.KA_TAB];return n&&n.boost&&new 
 // ---- buttons in the header ----
 function hubDots(){const sp=$("spinChip");if(sp)sp.classList.toggle("k-ping",hubCanSpin());const q=$("questChip");if(q){const d=Object.keys(hubQuests().done).length;q.textContent=`📋 Quests ${d}/3`}}
 {const after=$("topChip");const mk=(id,txt,fn)=>{const b=document.createElement("button");b.className="k-chip";b.id=id;b.textContent=txt;b.onclick=fn;return b};
- after.after(mk("spinChip","🎡 Daily spin",()=>hubSpin()),mk("questChip","📋 Quests",()=>hubQuestUI()),mk("shopChip","🛍️ Level shop",()=>lvShop()),mk("ideaChip","💡 Ideas",()=>hubIdeas()));}
+ after.after(mk("spinChip","🎡 Daily spin",()=>hubSpin()),mk("questChip","📋 Quests",()=>hubQuestUI()),mk("shopChip","🛍️ Level shop",()=>lvShop()));}
 
 // ---- sponsor spot: a small friendly ad for a friend's business. Fill these in to switch it on ----
 const SPONSOR={name:"",was:"Custom 3D Prints",text:"Keychains, figures, phone stands and more, 3D printed by a GamesOne player! Ask Goldenmiko-DEV to order one.",link:"",emoji:"🖨️"};// e.g. name:"Ali's 3D Prints",text:"Custom 3D printed keychains, figures and phone stands!",link:"https://instagram.com/..."
@@ -9557,6 +9571,7 @@ const SKILLS={
   {id:"armor",ic:"🛡️",n:"Plate Armor",lv:["Take 8% less damage","16% less","24% less"],cost:[0,0,0],req:[5,15,35]},
   {id:"stamina",ic:"💪",n:"Endurance",lv:["Stamina refills 15% faster","30% faster","45% faster"],cost:[0,0,0],req:[2,10,25]},
   {id:"swift",ic:"💨",n:"Swift",lv:["Move 4% faster","8% faster","12% faster"],cost:[0,0,0],req:[4,15,40]}]};
+["justup","koth","cannon","skate","thief","tycoon"].forEach(g=>{delete SKILLS[g];try{delete SKG[g]}catch(e){}});
 function skDef(g,id){return(SKILLS[g]||[]).find(x=>x.id===id)}
 function skL(g,id){const d=skDef(g,id);if(!d)return 0;if(d.get)return d.get()||0;return(S.skills[g]&&S.skills[g][id])||0}
 function skSet(g,id,v){const d=skDef(g,id);if(d.set){d.set(v);return}(S.skills[g]=S.skills[g]||{})[id]=v}
@@ -10922,9 +10937,9 @@ window.__GT=GT;window.__GTX={get S(){return S},gtMenu,gtStart};window.gtDistAt=g
 
 // ================= HIDDEN SECRETS & MESSAGES (tucked into every game) =================
 // Each secret and message lives in one game. Play that game for a while and a tiny sparkle shows up somewhere on screen for a few seconds. Tap it before it's gone.
-const HUNT_SPOT={s1:"cannon",s2:"night",s3:"dash",s5:"storm",s6:"fp",s7:"rivals",s8:"crown",s9:"soccer",s10:"cube",s14:"justup"};
+const HUNT_SPOT={s1:"hop",s2:"night",s3:"dash",s5:"storm",s6:"fp",s7:"rivals",s8:"crown",s9:"soccer",s10:"cube",s14:"snow"};
 SECRETS.forEach(sc=>{if(HUNT_SPOT[sc.id]){sc.room=null;sc.hid=HUNT_SPOT[sc.id];}});
-const HUNT_TABS=["fp","hollow","storm","crown","night","sk","soccer","wobble","justup","hop","dash","snow","rivals","cannon","cube","hoop"];
+const HUNT_TABS=["fp","hollow","storm","crown","night","sk","soccer","wobble","hop","dash","snow","rivals","cube","hoop"];
 MSGS.forEach((m,i)=>{m.hid=HUNT_TABS[(i*4+1)%HUNT_TABS.length];});
 const HUNT={t:{},next:{},el:null,last:Date.now()};
 ["pointerdown","keydown","touchstart","mousemove"].forEach(ev=>addEventListener(ev,()=>{HUNT.last=Date.now();},{capture:true,passive:true}));
